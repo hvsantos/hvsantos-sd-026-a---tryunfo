@@ -81,6 +81,17 @@ class App extends React.Component {
     });
   };
 
+  deleteCard = (nameToRemove, check) => {
+    const { savedCards } = this.state;
+    const removeCard = savedCards.filter(({ cardName }) => cardName !== nameToRemove);
+    if (check) {
+      this.setState({
+        hasTrunfo: false,
+      });
+    }
+    this.setState({ savedCards: removeCard });
+  };
+
   render() {
     const {
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
@@ -120,17 +131,25 @@ class App extends React.Component {
         <div>
           <h1>Cartas Salvas</h1>
           { savedCards.map((obj) => (
-            <Card
-              key={ obj.cardName }
-              cardName={ obj.cardName }
-              cardDescription={ obj.cardDescription }
-              cardAttr1={ obj.cardAttr1 }
-              cardAttr2={ obj.cardAttr2 }
-              cardAttr3={ obj.cardAttr3 }
-              cardImage={ obj.cardImage }
-              cardRare={ obj.cardRare }
-              cardTrunfo={ obj.cardTrunfo }
-            />
+            <div key={ obj.cardName }>
+              <Card
+                cardName={ obj.cardName }
+                cardDescription={ obj.cardDescription }
+                cardAttr1={ obj.cardAttr1 }
+                cardAttr2={ obj.cardAttr2 }
+                cardAttr3={ obj.cardAttr3 }
+                cardImage={ obj.cardImage }
+                cardRare={ obj.cardRare }
+                cardTrunfo={ obj.cardTrunfo }
+              />
+              <button
+                type="button"
+                data-testid="delete-button"
+                onClick={ () => this.deleteCard(obj.cardName, obj.cardTrunfo) }
+              >
+                Excluir
+              </button>
+            </div>
           )) }
         </div>
       </div>
