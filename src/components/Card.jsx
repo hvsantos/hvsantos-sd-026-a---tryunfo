@@ -10,7 +10,6 @@ export default class Card extends Component {
     const tagzinha = <p data-testid="trunfo-card">Super Trunfo</p>;
     return (
       <div>
-        <h1>PRÉ-VISUALIZAÇÃO</h1>
         <div>
           { cardTrunfo ? tagzinha : '' }
           <h2 data-testid="name-card">{ cardName }</h2>

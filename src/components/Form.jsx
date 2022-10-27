@@ -8,6 +8,20 @@ export default class Form extends Component {
       cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
       onInputChange, onSaveButtonClick,
     } = this.props;
+    const normalTag = (
+      <label htmlFor="cardTrunfo">
+        <input
+          type="checkbox"
+          id="cardTrunfo"
+          data-testid="trunfo-input"
+          checked={ cardTrunfo }
+          onChange={ (e) => {
+            onInputChange(e.target.id, e.target.checked);
+          } }
+        />
+        Super Trybe Tryunfo
+      </label>);
+    const tagTrunfo = <p>Você já tem um Super Trunfo em seu baralho</p>;
     return (
       <form>
         <label htmlFor="cardName">
@@ -88,21 +102,7 @@ export default class Form extends Component {
             <option value="muito raro">muito raro</option>
           </select>
         </label>
-        <label htmlFor="cardTrunfo">
-          <input
-            type="checkbox"
-            id="cardTrunfo"
-            data-testid="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ (e) => {
-              onInputChange(e.target.id, e.target.checked);
-              if (!hasTrunfo) {
-                onInputChange('hasTrunfo', !hasTrunfo);
-              }
-            } }
-          />
-          Super Trybe Tryunfo
-        </label>
+        { (hasTrunfo) ? tagTrunfo : normalTag }
         <button
           type="button"
           data-testid="save-button"
